@@ -5,22 +5,21 @@ import java.util.Scanner;
  */
 public class KolkoKrzyzyk {
 
-        private static String chosePlayer(){
-            System.out.println("który gracz zaczyna? x czy o?");
+        private static int chosePlayer(){
+            System.out.println("który gracz zaczyna? 1 - X czy 2 - O?");
             String first;
             Scanner odczyt = new Scanner(System.in);
             first = odczyt.nextLine();
-            return first;
-        }
+            int x = Integer.valueOf(first);
+            return x;
 
-        private static boolean x = true;
-        private static boolean y = true;
+        }
         private static Scanner input = new Scanner(System.in);
         private static char table[][] = {{' ', ' ', ' '},
                                             {' ', ' ', ' '},
                                             {' ', ' ', ' '}};
 
-        private static boolean checkResult(String who){
+        private static boolean checkResult(int x){
             if ((table[0][0] == table[1][0] && table[1][0] == table[2][0] && table[2][0] != ' ') ||
                     (table[0][1] == table[1][1] && table[1][1] == table[2][1] && table[2][1] != ' ') ||
                     (table[0][2] == table[1][2] && table[1][2] == table[2][2] && table[2][2] != ' ') ||
@@ -29,29 +28,26 @@ public class KolkoKrzyzyk {
                     (table[2][0] == table[2][1] && table[2][1] == table[2][2] && table[2][2] != ' ') ||
                     (table[0][0] == table[1][1] && table[1][1] == table[2][2] && table[2][2] != ' ') ||
                     (table[0][2] == table[1][1] && table[1][1] == table[2][0] && table[2][0] != ' ')) {
-                if (who!="o") {
+                if (x % 2 ==0) {
                     System.out.println("Win Player X");
                 } else {
                     System.out.println("Win Player O");
                 }
                 return true;
-
-
-
             }
             return false;
         }
 
-    private static void User(String who) {
+    private static void User(int x) {
 
         boolean correct = false;
-        char first = who.charAt(0);
-        if(first!='x'){
-            first='o';
+
+        if(x % 2 == 0){
+
             System.out.println("Podaj wspolrzedne dla O (np: a1): ");
         }
         else {
-            first='x';
+
             System.out.println("Podaj wspolrzedne dla X (np: a1): ");
         }
         while (!correct) {
@@ -85,17 +81,18 @@ public class KolkoKrzyzyk {
                 if (table[a][b] != ' ') {
                     System.out.println("To pole jest już zajęte");
                 } else {
-                    if(first!='o'){
-
-                        table[a][b] = 'X';
-                        correct = true;
-                    }
-                    else{
+                    if(x%2 ==0){
 
                         table[a][b] = 'O';
                         correct = true;
                     }
+                    else{
 
+                        table[a][b] = 'X';
+                        correct = true;
+                    }
+
+                    System.out.println("koniec x: "+x);
                 }
             }
         }
@@ -111,13 +108,15 @@ public class KolkoKrzyzyk {
         }
 
         public static void main(String[] args) {
-            String who = chosePlayer();
-            while (!checkResult(who)) {
+            int a = chosePlayer();
+            while (!checkResult(a)) {
                 printTable();
-                User(who);
+                User(a);
+                a++;
             }
             printTable();
-            checkResult(who);
+            checkResult(a);
+
         }
 }
 
