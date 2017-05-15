@@ -7,15 +7,14 @@ public class KolkoKrzyzyk {
 
         private static String chosePlayer(){
             System.out.println("który gracz zaczyna? x czy o?");
-
             String first;
             Scanner odczyt = new Scanner(System.in);
             first = odczyt.nextLine();
             return first;
         }
 
-    private static boolean x = true;
-    private static boolean y = true;
+        private static boolean x = true;
+        private static boolean y = true;
         private static Scanner input = new Scanner(System.in);
         private static char table[][] = {{' ', ' ', ' '},
                                             {' ', ' ', ' '},
@@ -52,12 +51,9 @@ public class KolkoKrzyzyk {
             System.out.println("Podaj wspolrzedne dla O (np: a1): ");
         }
         else {
-            first='o';
+            first='x';
             System.out.println("Podaj wspolrzedne dla X (np: a1): ");
-
         }
-
-
         while (!correct) {
             String coord = input.next();
             if (coord.length() != 2) {
@@ -123,8 +119,5 @@ public class KolkoKrzyzyk {
             printTable();
             checkResult(who);
         }
-
-
-
 }
 
